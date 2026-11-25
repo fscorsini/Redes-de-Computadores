@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Atividade prática — Configuração de roteador</title>
+  <style>
+    :root{--navy:#112b45;--blue:#1769aa;--cyan:#eaf5fc;--ink:#17212b;--muted:#5b6875;--line:#d8e0e8;--green:#168348;--yellow:#a66a00;--red:#bd3030;--bg:#f3f6f9}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+    header{background:linear-gradient(120deg,#112b45,#1769aa);color:#fff;padding:32px 20px}
+    .wrap{max-width:1120px;margin:auto;padding:0 20px}header h1{font-size:clamp(1.7rem,3vw,2.4rem);margin:0 0 6px}header p{margin:0;color:#e3f1ff}
+    main{padding:24px 0 56px}.card{background:white;border:1px solid var(--line);border-radius:14px;padding:22px;margin:0 0 18px;box-shadow:0 3px 12px #18344b0a}
+    h2{font-size:1.25rem;color:var(--navy);margin:0 0 12px}h3{font-size:1.04rem;margin:0 0 8px;color:var(--navy)}p{margin:8px 0}.intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:18px;align-items:center}
+    .topology{width:100%;height:auto;display:block;background:#f8fbfd;border-radius:12px;border:1px solid var(--line)}.pill{display:inline-block;padding:3px 9px;border-radius:999px;background:var(--cyan);color:#145b8e;font-size:.86rem;font-weight:650}
+    label{font-weight:650;display:block;margin:8px 0 5px}input[type=text],input[type=password],.command{width:100%;border:1px solid #9eabb8;border-radius:8px;padding:11px 12px;font:inherit}input:focus,.command:focus{outline:3px solid #aad8fb;border-color:var(--blue)}button{border:0;border-radius:8px;background:var(--blue);color:#fff;padding:10px 16px;font:inherit;font-weight:700;cursor:pointer}button:hover{filter:brightness(.93)}button.secondary{background:#e8edf2;color:var(--ink)}button:disabled{opacity:.45;cursor:not-allowed}.hidden{display:none!important}
+    table{width:100%;border-collapse:collapse;font-size:.95rem}th,td{border:1px solid var(--line);padding:9px 11px;text-align:left;vertical-align:top}th{background:#eaf0f5;color:var(--navy)}code,.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#f0f3f6;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}.table-scroll{overflow:auto}
+    .note{border-left:4px solid #e0a82e;background:#fff8e8;padding:11px 13px;border-radius:6px;color:#533e14}.steps{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:10px;color:var(--muted);font-weight:650}.progress{height:9px;background:#e5ebf0;border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;width:0;background:#26a269;transition:width .2s}.demand{font-size:1.08rem;margin:12px 0}.hint{color:var(--muted);font-size:.92rem}.feedback{font-weight:750;padding:10px 12px;border-radius:8px;margin-top:12px}.feedback.ok{background:#e6f6ed;color:#116137}.feedback.partial{background:#fff4d8;color:#855400}.feedback.bad{background:#ffeded;color:#982525}.expected{margin-top:8px}.scorebox{display:flex;gap:14px;flex-wrap:wrap}.score-total{font-size:2rem;font-weight:800;color:var(--blue)}.score-item{flex:1;min-width:220px;border:1px solid var(--line);border-radius:10px;padding:12px}.score-item small{color:var(--muted)}.tag{float:right;color:var(--muted);font-weight:700}
+    .statusline{display:flex;gap:10px;align-items:center}.status-icon{font-size:1.35rem}.good{color:var(--green)}.warn{color:var(--yellow)}.badc{color:var(--red)}footer{text-align:center;color:var(--muted);padding:14px 20px 28px}
+    @media(max-width:760px){.intro-grid{grid-template-columns:1fr}.card{padding:17px}.wrap{padding:0 13px}header{padding:26px 0}table{font-size:.88rem}}
+    @media print{body{background:white}.no-print,header .sub{display:none!important}.card{box-shadow:none;break-inside:avoid}main{padding-top:0}.score-total{color:#000}}
+  </style>
+</head>
+<body>
+<header><div class="wrap"><h1>Configuração inicial de roteador</h1><p class="sub">Atividade prática de Redes de Computadores · Packet Tracer</p></div></header>
+<main class="wrap">
+  <section class="card" id="startCard">
+    <div class="intro-grid">
+      <div><span class="pill">Antes de começar</span><h2 style="margin-top:10px">Configure, verifique e registre</h2>
+        <p>Leia a topologia e os parâmetros abaixo. Em cada etapa, digite o comando IOS completo que atende à demanda e selecione <b>Enviar comando</b>. A atividade aceita o comando inteiro, sem precisar digitar o prompt (<code>Router(config)#</code>).</p>
+        <p>Você pode usar maiúsculas ou minúsculas. Espaços extras são ignorados. Cada etapa vale pontos; erros reduzem a pontuação daquela etapa. Após três tentativas incorretas, a resposta será mostrada.</p>
+        <label for="studentName">Nome do aluno</label><input id="studentName" type="text" maxlength="80" placeholder="Digite seu nome completo" autocomplete="name">
+        <p><button id="startBtn">Iniciar atividade</button></p>
+      </div>
+      <svg class="topology" viewBox="0 0 700 310" role="img" aria-label="Duas redes locais conectadas por um roteador">
+        <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L0,6 L6,3 z" fill="#71869a"/></marker></defs>
+        <text x="160" y="32" text-anchor="middle" font-size="17" font-weight="700" fill="#123d5b">REDE A · 192.168.10.0/24</text>
+        <text x="540" y="32" text-anchor="middle" font-size="17" font-weight="700" fill="#123d5b">REDE B · 192.168.20.0/24</text>
+        <rect x="52" y="55" width="216" height="220" rx="14" fill="#eaf5fc" stroke="#a8cce2"/><rect x="432" y="55" width="216" height="220" rx="14" fill="#eaf5fc" stroke="#a8cce2"/>
+        <rect x="112" y="118" width="96" height="44" rx="8" fill="#fff" stroke="#5684a5"/><text x="160" y="145" text-anchor="middle" font-size="16" font-weight="700">Switch A</text>
+        <rect x="492" y="118" width="96" height="44" rx="8" fill="#fff" stroke="#5684a5"/><text x="540" y="145" text-anchor="middle" font-size="16" font-weight="700">Switch B</text>
+        <rect x="74" y="196" width="72" height="40" rx="7" fill="#fff" stroke="#5684a5"/><text x="110" y="221" text-anchor="middle" font-size="14">PC-A1</text>
+        <rect x="174" y="196" width="72" height="40" rx="7" fill="#fff" stroke="#5684a5"/><text x="210" y="221" text-anchor="middle" font-size="14">PC-A2</text>
+        <rect x="454" y="196" width="72" height="40" rx="7" fill="#fff" stroke="#5684a5"/><text x="490" y="221" text-anchor="middle" font-size="14">PC-B1</text>
+        <rect x="554" y="196" width="72" height="40" rx="7" fill="#fff" stroke="#5684a5"/><text x="590" y="221" text-anchor="middle" font-size="14">PC-B2</text>
+        <path d="M110 196 L140 162 M210 196 L180 162 M490 196 L520 162 M590 196 L560 162" stroke="#71869a" stroke-width="2"/>
+        <path d="M208 140 C275 90, 300 95, 322 137 M492 140 C425 90, 400 95, 378 137" fill="none" stroke="#71869a" stroke-width="3" marker-end="url(#arrow)"/>
+        <circle cx="350" cy="152" r="39" fill="#1769aa"/><text x="350" y="148" text-anchor="middle" font-size="15" font-weight="700" fill="white">Router1</text><text x="350" y="168" text-anchor="middle" font-size="12" fill="white">G0/0 · G0/1</text>
+      </svg>
+    </div>
+  </section>
+
+  <section class="card"><h2>Parâmetros definidos para o roteador</h2>
+    <div class="table-scroll"><table><thead><tr><th>Item</th><th>Configuração esperada</th><th>Observação</th></tr></thead><tbody>
+      <tr><td>Nome do dispositivo</td><td><code>Router1</code></td><td>Hostname do roteador</td></tr>
+      <tr><td>Senha EXEC privilegiado</td><td><code>Net@2026</code></td><td>Usar <code>enable secret</code></td></tr>
+      <tr><td>Console</td><td>Senha <code>Console@26</code></td><td>Console 0; autenticação habilitada</td></tr>
+      <tr><td>Linhas VTY</td><td>0 a 4; senha <code>Remoto@26</code></td><td>Autenticação habilitada; entrada SSH</td></tr>
+      <tr><td>Banner MOTD</td><td><code>ACESSO RESTRITO - Somente usuarios autorizados.</code></td><td>Delimitador escolhido pelo aluno</td></tr>
+      <tr><td>G0/0 · Rede A</td><td>IPv4 <code>192.168.10.1 255.255.255.0</code><br>IPv6 <code>2001:DB8:ACAD:10::1/64</code></td><td>Descrição: <code>Gateway da Rede A</code></td></tr>
+      <tr><td>G0/1 · Rede B</td><td>IPv4 <code>192.168.20.1 255.255.255.0</code><br>IPv6 <code>2001:DB8:ACAD:20::1/64</code></td><td>Descrição: <code>Gateway da Rede B</code></td></tr>
+      <tr><td>Verificação</td><td><code>show ip interface brief</code>, <code>show ipv6 interface brief</code>, <code>show ip route</code>, <code>show ipv6 route</code>, <code>show interfaces</code>, <code>show ip interfaces</code>, <code>show ipv6 interface</code></td><td>Comandos EXEC privilegiado</td></tr>
+    </tbody></table></div>
+    <p class="note"><b>Observação sobre SSH:</b> nesta atividade, você configurará a linha VTY para aceitar somente SSH conforme os comandos estudados. Em um roteador real, o serviço SSH também exige pré-requisitos, como nome de domínio, usuário local e chaves criptográficas.</p>
+  </section>
+
+  <section class="card hidden" id="quizCard">
+    <div class="steps"><span id="progressText">Etapa 1 de 1</span><span id="stepPoints">Pontos possíveis: 0</span></div><div class="progress"><i id="progressBar"></i></div>
+    <div class="demand" id="demand"></div><p class="hint" id="context"></p>
+    <form id="commandForm"><label for="commandInput">Digite o comando IOS completo</label><input id="commandInput" class="command" type="text" autocomplete="off" spellcheck="false" placeholder="Ex.: hostname Router1" required>
+      <p><button id="sendBtn" type="submit">Enviar comando</button> <button type="button" class="secondary" id="skipBtn">Pular etapa</button></p></form>
+    <div id="feedback" aria-live="polite"></div>
+    <div id="nextArea" class="hidden"><button id="nextBtn">Próxima etapa</button></div>
+  </section>
+
+  <section class="card hidden" id="resultCard"><h2>Resultado da atividade</h2>
+    <p><b>Aluno:</b> <span id="resultName"></span></p><div class="scorebox"><div><div class="score-total"><span id="totalScore">0</span>/100</div><div>Nota total</div></div><div class="score-item"><b>Etapas concluídas</b><br><span id="completedCount">0</span> de <span id="totalCount">0</span></div></div>
+    <h3 style="margin-top:20px">Pontuação por item e pontos perdidos</h3><div class="table-scroll"><table><thead><tr><th>#</th><th>Demanda</th><th>Nota</th><th>Perda</th><th>Resultado</th></tr></thead><tbody id="resultRows"></tbody></table></div>
+    <p class="note"><b>Orientação:</b> tire um print desta tela com a nota total e as notas por item e envie conforme orientação do professor.</p>
+    <p class="no-print"><button id="restartBtn">Reiniciar atividade</button> <button class="secondary" onclick="window.print()">Imprimir resultado</button></p>
+  </section>
+</main>
+<footer>Disciplina de Redes de Computadores · Prof. Fábio Corsini</footer>
+<script>
+const tasks = [
+ {d:'Acesse o modo EXEC privilegiado.',a:['enable']},
+ {d:'Entre no modo de configuração global.',a:['configure terminal']},
+ {d:'Configure o nome do roteador para Router1.',a:['hostname router1']},
+ {d:'Configure a senha secreta do modo EXEC privilegiado como Net@2026.',a:['enable secret net@2026']},
+ {d:'Acesse a configuração da linha de console 0.',a:['line console 0']},
+ {d:'Configure a senha do console como Console@26.',a:['password console@26']},
+ {d:'Habilite a autenticação por senha na linha de console.',a:['login']},
+ {d:'Acesse a configuração das linhas VTY de 0 a 4.',a:['line vty 0 4']},
+ {d:'Configure a senha das linhas VTY como Remoto@26.',a:['password remoto@26']},
+ {d:'Habilite a autenticação por senha nas linhas VTY.',a:['login']},
+ {d:'Permita somente conexões SSH nas linhas VTY.',a:['transport input ssh']},
+ {d:'Retorne ao modo de configuração global.',a:['exit']},
+ {d:'Ative a criptografia das senhas simples no arquivo de configuração.',a:['service password-encryption']},
+ {d:'Configure um banner MOTD com a mensagem “ACESSO RESTRITO - Somente usuarios autorizados.”. Escolha um delimitador que não apareça na mensagem.',a:['banner motd'] , custom:'banner'},
+ {d:'Acesse a interface GigabitEthernet 0/0, conectada à Rede A.',a:['interface gigabitethernet 0/0']},
+ {d:'Defina a descrição da G0/0 como “Gateway da Rede A”.',a:['description gateway da rede a']},
+ {d:'Configure o IPv4 da G0/0 como 192.168.10.1/24.',a:['ip address 192.168.10.1 255.255.255.0']},
+ {d:'Configure o IPv6 da G0/0 como 2001:DB8:ACAD:10::1/64.',a:['ipv6 address 2001:db8:acad:10::1/64']},
+ {d:'Habilite a interface G0/0.',a:['no shutdown']},
+ {d:'Acesse a interface GigabitEthernet 0/1, conectada à Rede B.',a:['interface gigabitethernet 0/1']},
+ {d:'Defina a descrição da G0/1 como “Gateway da Rede B”.',a:['description gateway da rede b']},
+ {d:'Configure o IPv4 da G0/1 como 192.168.20.1/24.',a:['ip address 192.168.20.1 255.255.255.0']},
+ {d:'Configure o IPv6 da G0/1 como 2001:DB8:ACAD:20::1/64.',a:['ipv6 address 2001:db8:acad:20::1/64']},
+ {d:'Habilite a interface G0/1.',a:['no shutdown']},
+ {d:'Acesse o modo EXEC privilegiado para salvar a configuração.',a:['end']},
+ {d:'Salve a configuração atual como configuração de inicialização.',a:['copy running-config startup-config']},
+ {d:'Consulte um resumo das interfaces e dos endereços IPv4, incluindo status e protocolo.',a:['show ip interface brief']},
+ {d:'Consulte um resumo das interfaces e dos endereços IPv6.',a:['show ipv6 interface brief']},
+ {d:'Exiba a tabela de roteamento IPv4.',a:['show ip route']},
+ {d:'Exiba a tabela de roteamento IPv6.',a:['show ipv6 route']},
+ {d:'Exiba as estatísticas detalhadas de todas as interfaces (inclui IPv4).',a:['show interfaces']},
+ {d:'Exiba as estatísticas IPv4 de todas as interfaces do roteador.',a:['show ip interfaces']},
+ {d:'Exiba as estatísticas IPv6 das interfaces do roteador.',a:['show ipv6 interface']}
+];
+let student='', index=0, attempts=0, scores=[], solved=false;
+const $=id=>document.getElementById(id);
+function norm(s){return s.trim().toLowerCase().replace(/\s+/g,' ')}
+function canonical(s){return norm(s)}
+function isCorrect(task,raw){const n=norm(raw); if(task.custom==='banner'){const m=n.match(/^banner motd (\S)(.*)\1$/);return !!m&&m[2].trim()==='acesso restrito - somente usuarios autorizados.'} return task.a.some(x=>canonical(x)===canonical(n))}
+function near(task,raw){const n=norm(raw); if(!n)return false; if(task.custom==='banner')return n.startsWith('banner motd'); const cand=task.a.map(canonical); return cand.some(a=>a.startsWith(n+' ')||n.startsWith(a+' ')||editDistance(a,n)<=2||a.split(' ').length===n.split(' ').length+1&&a.includes(n));}
+function editDistance(a,b){if(Math.abs(a.length-b.length)>2)return 99;let row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let prev=row[0];row[0]=i;for(let j=1;j<=b.length;j++){let t=row[j];row[j]=Math.min(row[j]+1,row[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=t}}return row[b.length]}
+function answers(task){return task.custom==='banner'?['banner motd #ACESSO RESTRITO - Somente usuarios autorizados.#']:task.a}
+function refresh(){const task=tasks[index];$('progressText').textContent=`Etapa ${index+1} de ${tasks.length}`;$('stepPoints').textContent=`Pontos possíveis: ${(100/tasks.length).toFixed(1).replace('.',',')}`;$('progressBar').style.width=`${index/tasks.length*100}%`;$('demand').textContent=task.d;$('context').textContent=`Tentativas incorretas nesta etapa: ${attempts} de 3. A pontuação desta etapa diminui a cada erro.`;$('commandInput').value='';$('feedback').innerHTML='';$('nextArea').classList.add('hidden');$('sendBtn').disabled=false;$('commandInput').disabled=false;$('commandInput').focus()}
+function begin(){student=$('studentName').value.trim();if(!student){$('studentName').focus();$('studentName').reportValidity();return} $('startCard').classList.add('hidden');$('quizCard').classList.remove('hidden');refresh()}
+$('studentName').required=true;$('startBtn').onclick=begin;$('studentName').addEventListener('keydown',e=>{if(e.key==='Enter')begin()});
+$('commandForm').addEventListener('submit',e=>{e.preventDefault();if(solved)return;const task=tasks[index],raw=$('commandInput').value.trim();if(!raw)return;const base=100/tasks.length;attempts++;
+ if(isCorrect(task,raw)){const points=Math.max(0,base*(1-(attempts-1)*.25));scores.push({points,attempts,answer:raw,status:'Correto'});solved=true;$('feedback').innerHTML=`<div class="feedback ok"><span class="status-icon">✅</span> Comando correto! Nota nesta etapa: ${points.toFixed(1).replace('.',',')} de ${base.toFixed(1).replace('.',',')}.</div>`;lockStep();}
+ else {const isPartial=near(task,raw);const penalty=base*.25;$('feedback').innerHTML=`<div class="feedback ${isPartial?'partial':'bad'}"><span class="status-icon">${isPartial?'⚠️':'❌'}</span> ${isPartial?'Quase! Há um erro pequeno ou falta um parâmetro.':'Comando incorreto.'} Tentativa ${attempts}/3. ${attempts<3?`Se acertar na próxima, ainda pode ganhar até ${Math.max(0,base*(1-attempts*.25)).toFixed(1).replace('.',',')} pontos.`:''}</div>`;
+   if(attempts>=3){scores.push({points:0,attempts,answer:'',status:'Resposta exibida após 3 erros'});solved=true;$('feedback').innerHTML+=`<div class="expected"><b>Resposta esperada:</b> <code>${answers(task).join(' ou ')}</code></div>`;lockStep();}
+   else {$('context').textContent=`Tentativas incorretas nesta etapa: ${attempts} de 3. Cada erro reduz em 25% a nota possível desta etapa.`;$('commandInput').select()}
+ }
+});
+function lockStep(){$('sendBtn').disabled=true;$('commandInput').disabled=true;$('nextArea').classList.remove('hidden');$('nextBtn').textContent=index===tasks.length-1?'Ver resultado':'Próxima etapa'}
+$('nextBtn').onclick=()=>{if(index<tasks.length-1){index++;attempts=0;solved=false;refresh()}else showResult()};
+$('skipBtn').onclick=()=>{if(solved)return;scores.push({points:0,attempts,answer:'',status:'Etapa pulada'});solved=true;$('feedback').innerHTML='<div class="feedback bad">Etapa pulada. Nota nesta etapa: 0.</div>';lockStep()};
+function showResult(){ $('quizCard').classList.add('hidden');$('resultCard').classList.remove('hidden');$('resultName').textContent=student;const total=scores.reduce((s,x)=>s+x.points,0);$('totalScore').textContent=total.toFixed(1).replace('.',',');$('completedCount').textContent=scores.filter(x=>x.attempts>0&&x.status!=='Etapa pulada').length;$('totalCount').textContent=tasks.length;const rows=tasks.map((t,i)=>{const r=scores[i]||{points:0,attempts:0,status:'Não respondida'};const loss=100/tasks.length-r.points;const icon=r.points>0?'✅':r.status==='Etapa pulada'?'⏭️':'❌';return `<tr><td>${i+1}</td><td>${t.d}</td><td>${r.points.toFixed(1).replace('.',',')}</td><td>${loss.toFixed(1).replace('.',',')}</td><td><span class="statusline"><span>${icon}</span><span>${r.status}${r.attempts?` (${r.attempts} tentativa(s))`:''}</span></span></td></tr>`}).join('');$('resultRows').innerHTML=rows;window.scrollTo({top:$('resultCard').offsetTop-12,behavior:'smooth'})}
+$('restartBtn').onclick=()=>{student='';index=0;attempts=0;scores=[];solved=false;$('resultCard').classList.add('hidden');$('startCard').classList.remove('hidden');$('studentName').value='';window.scrollTo({top:0,behavior:'smooth'})};
+</script>
+</body>
+</html>
