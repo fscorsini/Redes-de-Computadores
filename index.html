@@ -82,48 +82,53 @@
 <footer>Disciplina de Redes de Computadores · Prof. Fábio Corsini</footer>
 <script>
 const tasks = [
- {d:'Acesse o modo EXEC privilegiado.',a:['enable']},
- {d:'Entre no modo de configuração global.',a:['configure terminal']},
- {d:'Configure o nome do roteador para Router1.',a:['hostname router1']},
- {d:'Configure a senha secreta do modo EXEC privilegiado como Net@2026.',a:['enable secret net@2026']},
- {d:'Acesse a configuração da linha de console 0.',a:['line console 0']},
- {d:'Configure a senha do console como Console@26.',a:['password console@26']},
- {d:'Habilite a autenticação por senha na linha de console.',a:['login']},
- {d:'Acesse a configuração das linhas VTY de 0 a 4.',a:['line vty 0 4']},
- {d:'Configure a senha das linhas VTY como Remoto@26.',a:['password remoto@26']},
- {d:'Habilite a autenticação por senha nas linhas VTY.',a:['login']},
- {d:'Permita somente conexões SSH nas linhas VTY.',a:['transport input ssh']},
- {d:'Retorne ao modo de configuração global.',a:['exit']},
- {d:'Ative a criptografia das senhas simples no arquivo de configuração.',a:['service password-encryption']},
- {d:'Configure um banner MOTD com a mensagem “ACESSO RESTRITO - Somente usuarios autorizados.”. Escolha um delimitador que não apareça na mensagem.',a:['banner motd'] , custom:'banner'},
- {d:'Acesse a interface GigabitEthernet 0/0, conectada à Rede A.',a:['interface gigabitethernet 0/0']},
- {d:'Defina a descrição da G0/0 como “Gateway da Rede A”.',a:['description gateway da rede a']},
- {d:'Configure o IPv4 da G0/0 como 192.168.10.1/24.',a:['ip address 192.168.10.1 255.255.255.0']},
- {d:'Configure o IPv6 da G0/0 como 2001:DB8:ACAD:10::1/64.',a:['ipv6 address 2001:db8:acad:10::1/64']},
- {d:'Habilite a interface G0/0.',a:['no shutdown']},
- {d:'Acesse a interface GigabitEthernet 0/1, conectada à Rede B.',a:['interface gigabitethernet 0/1']},
- {d:'Defina a descrição da G0/1 como “Gateway da Rede B”.',a:['description gateway da rede b']},
- {d:'Configure o IPv4 da G0/1 como 192.168.20.1/24.',a:['ip address 192.168.20.1 255.255.255.0']},
- {d:'Configure o IPv6 da G0/1 como 2001:DB8:ACAD:20::1/64.',a:['ipv6 address 2001:db8:acad:20::1/64']},
- {d:'Habilite a interface G0/1.',a:['no shutdown']},
- {d:'Acesse o modo EXEC privilegiado para salvar a configuração.',a:['end']},
- {d:'Salve a configuração atual como configuração de inicialização.',a:['copy running-config startup-config']},
- {d:'Consulte um resumo das interfaces e dos endereços IPv4, incluindo status e protocolo.',a:['show ip interface brief']},
- {d:'Consulte um resumo das interfaces e dos endereços IPv6.',a:['show ipv6 interface brief']},
- {d:'Exiba a tabela de roteamento IPv4.',a:['show ip route']},
- {d:'Exiba a tabela de roteamento IPv6.',a:['show ipv6 route']},
- {d:'Exiba as estatísticas detalhadas de todas as interfaces (inclui IPv4).',a:['show interfaces']},
- {d:'Exiba as estatísticas IPv4 de todas as interfaces do roteador.',a:['show ip interfaces']},
- {d:'Exiba as estatísticas IPv6 das interfaces do roteador.',a:['show ipv6 interface']}
+ {d:'Acesse o modo EXEC privilegiado.',key:0},
+ {d:'Entre no modo de configuração global.',key:1},
+ {d:'Configure o nome do roteador para Router1.',key:2},
+ {d:'Configure a senha secreta do modo EXEC privilegiado como Net@2026.',key:3},
+ {d:'Acesse a configuração da linha de console 0.',key:4},
+ {d:'Configure a senha do console como Console@26.',key:5},
+ {d:'Habilite a autenticação por senha na linha de console.',key:6},
+ {d:'Acesse a configuração das linhas VTY de 0 a 4.',key:7},
+ {d:'Configure a senha das linhas VTY como Remoto@26.',key:8},
+ {d:'Habilite a autenticação por senha nas linhas VTY.',key:9},
+ {d:'Permita somente conexões SSH nas linhas VTY.',key:10},
+ {d:'Retorne ao modo de configuração global.',key:11},
+ {d:'Ative a criptografia das senhas simples no arquivo de configuração.',key:12},
+ {d:'Configure um banner MOTD com a mensagem “ACESSO RESTRITO - Somente usuarios autorizados.”. Escolha um delimitador que não apareça na mensagem.',key:13 , custom:'banner'},
+ {d:'Acesse a interface GigabitEthernet 0/0, conectada à Rede A.',key:14},
+ {d:'Defina a descrição da G0/0 como “Gateway da Rede A”.',key:15},
+ {d:'Configure o IPv4 da G0/0 como 192.168.10.1/24.',key:16},
+ {d:'Configure o IPv6 da G0/0 como 2001:DB8:ACAD:10::1/64.',key:17},
+ {d:'Habilite a interface G0/0.',key:18},
+ {d:'Acesse a interface GigabitEthernet 0/1, conectada à Rede B.',key:19},
+ {d:'Defina a descrição da G0/1 como “Gateway da Rede B”.',key:20},
+ {d:'Configure o IPv4 da G0/1 como 192.168.20.1/24.',key:21},
+ {d:'Configure o IPv6 da G0/1 como 2001:DB8:ACAD:20::1/64.',key:22},
+ {d:'Habilite a interface G0/1.',key:23},
+ {d:'Acesse o modo EXEC privilegiado para salvar a configuração.',key:24},
+ {d:'Salve a configuração atual como configuração de inicialização.',key:25},
+ {d:'Consulte um resumo das interfaces e dos endereços IPv4, incluindo status e protocolo.',key:26},
+ {d:'Consulte um resumo das interfaces e dos endereços IPv6.',key:27},
+ {d:'Exiba a tabela de roteamento IPv4.',key:28},
+ {d:'Exiba a tabela de roteamento IPv6.',key:29},
+ {d:'Exiba as estatísticas detalhadas de todas as interfaces (inclui IPv4).',key:30},
+ {d:'Exiba as estatísticas IPv4 de todas as interfaces do roteador.',key:31},
+ {d:'Exiba as estatísticas IPv6 das interfaces do roteador.',key:32}
 ];
+const answerCipher='LzXEcc4SYDvx36AVYJe16hoIj3PVAWd34JiPVFLbt+lWM8pPghttJOCTnFRelaTqARqDZpFRX3vP35hXWte64FQdg3fSFnZ3+piJeQmF5LNWM8pPgh9rOfHdnlZVxrnpEU7WNv1fWXXknI5KTNqk4VQNiXrTHG4y1M/LG2aZjacYAYF9zlFfe8/fkVBV0PbzABfGJIBHIAq4pt9JWsal8hscgjTSFm844JK9Cw2Xi6kvTIp7xxpsdcnRphtPx7frBx6JZtRTaznkiIkZSMa+pylCvTbFC2sjtqDRYhnGs/cCB4VxgANjJOeKkktfmLPrFxyfZNQabTm2oNFiGde36xoLlDTNHHYztN68en7mhcpUPKNH9CFLA9vd0Blo2rvgGhqDNNUAdzbmlJJKG9Sj8Rscj27BF20kut7fZBfu9OwaGoNmxhJhMrSalF5a17/xERqOcdIdZyO0zdIJGej63lYKg2fDAWsn4JSSVxvSt/ERGYdtgBdjd+aYmVwb1PTYWDXEfdBTYzPwj5hKSJXnvEZA1yKYXTNnuszdCw6A+LdBW8gmlUYsZ7ag0WIZ3KbzQk6HcMQBZyTn3c8JC4Ts4RZW3HXDEmZtpc3HAwqa4LFWM8pPgh1td+eViE1f2qHrVjPKT4IabCPxj5tYWND24h0Jh3bJB2cj/JiPV17B9rVbX8RJjCggM/GOnktSxaLsGwDGc8EHZyD1hN1dWpWk4BALxnaCLi4MtpSNGVrRsvcRHZU0kUoweaXLxRcJhfi0VFzTIY5BN2K6z8gMFYX02Fg1xH3QBTR39ZmZS17GpaVGXtYlmhdgb66cnlhfj+S1TlTXO5ZHIAq4pt9XVJWl7QEagnvXHSAKuKbfXFXR9NhYNcR3zwN7d+aIk1dS27GoFwGIcskUIiTgnI9NTsX75hsAgH3HUV97z9+OUVTC9uwETo961BZwMfWemBlZx7/gEky7OPtRcT/7it1QS8PgpR0AknHSFWM08d2fS1LQsKcpQr020xttILSUjRlJ2qPxEUy7OPtRcT/7it1QS8PgpQYBk2DFUV97z9+OUVTC9uwaGoNmxhJhMuffoBVgl6XtGxnGfdBTazngmI9fWtaz9lYzyk+CAGo4492USU2D9uwaGoNmxhJhMragoA==';
+const answerKey='dG7mFKBzAleU/f05O7XWhQ==';
+function decodeAnswerBank(){const encrypted=Uint8Array.from(atob(answerCipher),c=>c.charCodeAt(0));const key=Uint8Array.from(atob(answerKey),c=>c.charCodeAt(0));const plain=encrypted.map((b,i)=>b^key[i%key.length]);return JSON.parse(new TextDecoder().decode(plain))}
+const answerBank=decodeAnswerBank();
+function answerList(task){return answerBank[task.key]||[]}
 let student='', index=0, attempts=0, scores=[], solved=false;
 const $=id=>document.getElementById(id);
 function norm(s){return s.trim().toLowerCase().replace(/\s+/g,' ')}
 function canonical(s){return norm(s)}
-function isCorrect(task,raw){const n=norm(raw); if(task.custom==='banner'){const m=n.match(/^banner motd (\S)(.*)\1$/);return !!m&&m[2].trim()==='acesso restrito - somente usuarios autorizados.'} return task.a.some(x=>canonical(x)===canonical(n))}
-function near(task,raw){const n=norm(raw); if(!n)return false; if(task.custom==='banner')return n.startsWith('banner motd'); const cand=task.a.map(canonical); return cand.some(a=>a.startsWith(n+' ')||n.startsWith(a+' ')||editDistance(a,n)<=2||a.split(' ').length===n.split(' ').length+1&&a.includes(n));}
+function isCorrect(task,raw){const n=norm(raw); if(task.custom==='banner'){const m=n.match(/^banner motd (\S)(.*)\1$/);return !!m&&m[2].trim()==='acesso restrito - somente usuarios autorizados.'} return answerList(task).some(x=>canonical(x)===canonical(n))}
+function near(task,raw){const n=norm(raw); if(!n)return false; if(task.custom==='banner')return n.startsWith('banner motd'); const cand=answerList(task).map(canonical); return cand.some(a=>a.startsWith(n+' ')||n.startsWith(a+' ')||editDistance(a,n)<=2||a.split(' ').length===n.split(' ').length+1&&a.includes(n));}
 function editDistance(a,b){if(Math.abs(a.length-b.length)>2)return 99;let row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let prev=row[0];row[0]=i;for(let j=1;j<=b.length;j++){let t=row[j];row[j]=Math.min(row[j]+1,row[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=t}}return row[b.length]}
-function answers(task){return task.custom==='banner'?['banner motd #ACESSO RESTRITO - Somente usuarios autorizados.#']:task.a}
+function answers(task){return answerList(task)}
 function refresh(){const task=tasks[index];$('progressText').textContent=`Etapa ${index+1} de ${tasks.length}`;$('stepPoints').textContent=`Pontos possíveis: ${(100/tasks.length).toFixed(1).replace('.',',')}`;$('progressBar').style.width=`${index/tasks.length*100}%`;$('demand').textContent=task.d;$('context').textContent=`Tentativas incorretas nesta etapa: ${attempts} de 3. A pontuação desta etapa diminui a cada erro.`;$('commandInput').value='';$('feedback').innerHTML='';$('nextArea').classList.add('hidden');$('sendBtn').disabled=false;$('commandInput').disabled=false;$('commandInput').focus()}
 function begin(){student=$('studentName').value.trim();if(!student){$('studentName').focus();$('studentName').reportValidity();return} $('startCard').classList.add('hidden');$('quizCard').classList.remove('hidden');refresh()}
 $('studentName').required=true;$('startBtn').onclick=begin;$('studentName').addEventListener('keydown',e=>{if(e.key==='Enter')begin()});
